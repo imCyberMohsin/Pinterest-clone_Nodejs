@@ -8,7 +8,7 @@ passport.use(new localStrategy(userModel.authenticate()));
 
 //? Home Route (Login Page Display) 
 router.get('/', function (req, res, next) {
-  res.render('index');
+  res.render('index', {error : req.flash('error')});
 });
 
 

@@ -12,6 +12,9 @@
                     class=" py-3 text-3xl text-center font-semibold text-zinc-700 capitalize tracking-tighter leading-none ">
                     Login To
                     Pinterest</h1>
+                <% if(error.length > 0){ %>
+                    <p class="text-red-600"><%= error %></p>
+                <% } %> %>
                 <form action="/login" method="post" class="w-full px-14">
                     <div class="my-5">
                         <p class="text-zinc-600 text-sm font-extralight px-2">Username</p>
