@@ -19,6 +19,7 @@ router.get('/register', function (req, res, next) {
 
 router.post('/register', function (req, res, next) {
   const data = new userModel({
+    fullname: req.body.fullname,
     username: req.body.username,
     email: req.body.email,
   });

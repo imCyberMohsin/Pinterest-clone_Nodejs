@@ -1,11 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
-</head>
-<body>
-    <h1>sf</h1>
-</body>
-</html>
+<% include ./partials/Header.ejs %>
+
+<% include ./partials/LoggedinNav.ejs %>
+
+        <div class="profile-container w-full min-h-screen my-2">
+            <!-- Profile Details -->
+            <div class="profile-dets flex flex-col items-center">
+                <a href="#" class="text-center w-32 h-32 rounded-full">
+                    <img src="../images/pinterest-icon.svg" alt="profile" class="w-32 h-32">
+                </a>
+                <h3 class="my-2 text-4xl">FullName</h3>
+                <p class="my-2 text-sm text-[#5F5F5F]">@Username</p>
+                <p class="my-2 text-md">0 Following</p>
+                <div class="btns my-5">
+                    <a href="#"
+                        class="bg-zinc-200 p-3 hover:bg-zinc-300 transition-all duration-300 rounded-full">Share</a>
+                    <a href="/edit"
+                        class="bg-zinc-200 p-3 hover:bg-zinc-300 transition-all duration-300 rounded-full">Edit
+                        Profile</a>
+                </div>
+            </div>
+
+            <!-- Cards -->
+            <div class="cards">
+                
+            </div>
+        </div>
+
+<% include ./partials/Footer.ejs %>
