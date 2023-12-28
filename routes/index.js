@@ -71,9 +71,9 @@ router.get('/logout', (req, res, next) => {
 });
 
 //? Add Post/Create Post Route
-router.get('/add', async(req, res, next) => {
+router.get('/add', isLoggedIn, async(req, res, next) => {
   const user = await userModel.findOne({ username: req.session.passport.user })
-  res.render('add', {user})
+  res.render('add', {user}); // check it later if its working or not
 });
 
 //* Login Check Function 
