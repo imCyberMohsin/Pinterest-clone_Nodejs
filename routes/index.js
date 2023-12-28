@@ -3,12 +3,13 @@ var router = express.Router();
 const userModel = require('./users'); // user Model
 const passport = require('passport');
 const localStrategy = require('passport-local');
+const upload = require('./multer'); // File Upload
 
 passport.use(new localStrategy(userModel.authenticate()));
 
 //? Home Route (Login Page Display) 
 router.get('/', function (req, res, next) {
-  res.render('index', {error : req.flash('error')});
+  res.render('index', { error: req.flash('error') });
 });
 
 
@@ -45,9 +46,21 @@ router.post('/login', passport.authenticate('local', {
 })
 
 //? Profile Route Display
-router.get('/profile', isLoggedIn, (req, res, next) => {
-  res.render('profile');
+router.get('/profile', isLoggedIn, async(req, res, next) => {
+  const user = await userModel.findOne({ username: req.session.passport.user })
+  res.render('profile', {user});
 })
+
+//? File Upload Route
+router.post('/fileUpload', isLoggedIn, upload.single('image'), async function (req, res, next) {
+  if (!req.file) {
+    return res.status(400).send('No file uploaded')
+  }
+  const user = await userModel.findOne({ username: req.session.passport.user })
+  user.profileImage = req.file.filename;
+  await user.save();
+  res.redirect('/profile');
+});
 
 //? Logout Route
 router.get('/logout', (req, res, next) => {
@@ -55,6 +68,12 @@ router.get('/logout', (req, res, next) => {
     if (err) { return next(err) };
     res.redirect('/');  // logout to login page
   });
+});
+
+//? Add Post/Create Post Route
+router.get('/add', async(req, res, next) => {
+  const user = await userModel.findOne({ username: req.session.passport.user })
+  res.render('add', {user})
 });
 
 //* Login Check Function 

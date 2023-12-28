@@ -9,7 +9,7 @@
         <div>
             <a href="/feed" class="px-4 font-semibold">Home</a>
             <a href="#" class="px-4 font-semibold">Explore</a>
-            <a href="#" class="px-4 font-semibold">Create</a>
+            <a href="/add" class="px-4 font-semibold">Create</a>
         </div>
     </div>
 
@@ -17,10 +17,14 @@
 
     <!-- nav 2 -->
     <div class="right flex justify-center items-center px-5">
+        <!-- Logout BTN -->
+        <div class="logout-btn bg-red-600 text-white px-3 py-1 rounded-full mx-1">
+            <a href="/logout">Logout</a>
+        </div>
+
         <div class="bell px-3">
             <a href="">
-            <i class="text-2xl text-[#5F5F5F] fa-solid fa-bell"></i>
-
+                <i class="text-2xl text-[#5F5F5F] fa-solid fa-bell"></i>
             </a>
         </div>
 
@@ -30,9 +34,9 @@
             </a>
         </div>
 
-        <div class="profile-circle px-3">
-            <a href="/profile">
-                <img src="../images/pinterest-icon.svg" alt="profile" class="w-8">
+        <div class="profile-circle w-9 h-9 rounded-full overflow-hidden border-2 border-black flex items-center justify-center">
+            <a href="/profile" class="rounded-full bg-cover bg-center">
+                <img src="/images/uploads/<%= user.profileImage %>" alt="profile" class=" rounded-full w-7 h-7">
             </a>
         </div>
 
@@ -40,6 +44,6 @@
             <a href="">
             <i class="text-sm text-[#5F5F5F] fa-solid fa-chevron-down"></i>
             </a>
-        </div>        
+        </div>      
     </div>
 </nav>
