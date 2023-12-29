@@ -36,24 +36,23 @@
                 <a href="/profile" class="font-semibold text-base rounded-md px-4 py-2 hover:bg-zinc-200 underline decoration-2 focus:bg-white underline-offset-8 transition-all duration-300">Saved</a>
             </div>
 
-            <!-- Cards -->
-            <div class="cards flex justify-center flex-wrap gap-5 mt-8 p-5">
-                <div class="card">
-                    <div class="w-64 h-40 bg-black rounded-xl overflow-hidden">
-                        <img src="https://i.pinimg.com/564x/55/3b/bc/553bbc6785080a9d203427dbaf1016a5.jpg" alt="img" class="w-full h-full object-cover">
+            <!-- Dynamic Cards -->
+            <% if (user.posts && user.posts.length > 0) { %>
+                <div class="cards flex flex-wrap gap-5 mt-8 p-5">
+                    <div class="card">
+                        <div class="w-64 h-40 border-2 border-black rounded-xl overflow-hidden">
+                            <img src="/images/uploads/<%= user.posts[0].image %>" alt="img" class="w-full h-full object-cover">
+                        </div>
+                        <a href="/show/posts" class="inline-block pl-1 text-xl font-medium pt-2"><%= user.posts[0].title %></a>
+                        <h5 class="pl-1 text-xs text-zinc-600"><%= user.posts.length %> Pins</h5>
                     </div>
-                    <h3 class="pl-1 text-xl font-medium pt-2">Pin Name</h3>
-                    <h5 class="pl-1 text-xs text-zinc-600">23 Pins</h5>
                 </div>
-                <div class="card">
-                    <div class="w-64 h-40 bg-black rounded-xl overflow-hidden">
-                        <img src="https://i.pinimg.com/564x/55/3b/bc/553bbc6785080a9d203427dbaf1016a5.jpg" alt="img" class="w-full h-full object-cover">
+            <% } else { %>
+                    <div class="flex flex-col items-center gap-6">
+                        <p class="text-center">No posts available.</p>
+                        <a href="/add" class="text-white bg-red-600 p-3 hover:bg-red-700 transition-all duration-300 rounded-full">Create Post</a>
                     </div>
-                    <h3 class="pl-1 text-xl font-medium pt-2">Pin Name</h3>
-                    <h5 class="pl-1 text-xs text-zinc-600">23 Pins</h5>
-                </div>
-                
-            </div>
+                <% }%>
         </div>
 
         <!-- Script For Displaying Image Upload When Edit icon is clicked -->

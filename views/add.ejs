@@ -1,9 +1,46 @@
 <% include ./partials/Header.ejs %>
 
 <% include ./partials/LoggedinNav.ejs %>
+<hr>
 
+<div class="w-full min-h-screen">
+    <div class="post-header w-full h-fit flex justify-between items-center px-5 py-5">
+        <div>
+            <h2 class="text-xl font-semibold">Create Pin</h2>
+        </div>
+        <div class="flex justify-between items-center gap-2">
+            <h4 class="text-sm text-zinc-500">Changes Stored!</h4>
+            <form action="/createPost" method="post" class="bg-red-600 text-white px-3 py-3 rounded-full mx-1">
+                <button type="submit">Publish</button>
+            </form>
+        </div>
+    </div>
+    <hr>
 
-<h1>Create Post</h1>
+    <!-- form -->
+    <form action="/createPost" method="post" enctype="multipart/form-data" class="py-5 flex justify-center gap-14">
+        <!-- left -->
+        <div>
+            <input type="file" name="postimage" class="">
+            <div class="h-96 w-72 bg-zinc-300 rounded-2xl overflow-hidden">
+                <img src="" alt="img" class="w-full h-full">
+            </div>
+        </div>
 
+        <!-- right -->
+        <div class="flex flex-col  gap-10">
+            <div class="flex flex-col">
+                <label class="text-xs py-1" for="title">Title</label>
+                <input type="text" name="title" placeholder="Add a title" class=" w-96 rounded-2xl py-3 px-4 text-md font-thin outline-none border-2 focus:outline-4 focus:outline-sky-200 transition-all duration-100">
+            </div>
+    
+            <div class="flex flex-col">
+                <label class="text-xs py-1" for="description">Description</label>
+                <input type="text" name="description" placeholder="Add a detailed description" class=" w-96 rounded-2xl py-8 px-4 text-md font-thin outline-none border-2 focus:outline-4 focus:outline-sky-200 transition-all duration-100">
+            </div>
+            <button type="submit" class="bg-red-600 text-white px-3 py-3 rounded-full mx-1">Publish</button>
+        </div>
+    </form>
+</div>
 
 <% include ./partials/Footer.ejs %>

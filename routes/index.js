@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const userModel = require('./users'); // user Model
+const postModel = require('./posts'); // post Model
 const passport = require('passport');
 const localStrategy = require('passport-local');
 const upload = require('./multer'); // File Upload
@@ -45,10 +46,30 @@ router.post('/login', passport.authenticate('local', {
 }), (req, res, next) => {
 })
 
-//? Profile Route Display
-router.get('/profile', isLoggedIn, async(req, res, next) => {
-  const user = await userModel.findOne({ username: req.session.passport.user })
-  res.render('profile', {user});
+//? Profile Display
+router.get('/profile', isLoggedIn, async (req, res, next) => {
+  const user =
+    await userModel
+      .findOne({ username: req.session.passport.user })
+      .populate('posts')
+  res.render('profile', { user });
+})
+
+//? Show Pins 
+router.get('/show/posts', isLoggedIn, async (req, res, next) => {
+  const user =
+    await userModel
+      .findOne({ username: req.session.passport.user })
+      .populate('posts')
+  res.render('show', { user });
+})
+
+//? Feed - Display All Posts 
+router.get('/feed', isLoggedIn, async (req, res, next) => {
+  const user = await userModel.findOne({ username: req.session.passport.user });
+  const posts = await postModel.find().populate('user');
+  
+  res.render('feed', { user, posts });
 })
 
 //? File Upload Route
@@ -71,9 +92,23 @@ router.get('/logout', (req, res, next) => {
 });
 
 //? Add Post/Create Post Route
-router.get('/add', isLoggedIn, async(req, res, next) => {
+router.get('/add', isLoggedIn, async (req, res, next) => {
   const user = await userModel.findOne({ username: req.session.passport.user })
-  res.render('add', {user}); // check it later if its working or not
+  res.render('add', { user });
+});
+
+router.post('/createPost', isLoggedIn, upload.single('postimage'), async (req, res, next) => {
+  const user = await userModel.findOne({ username: req.session.passport.user })
+  const post = await postModel.create({
+    user: user._id,
+    title: req.body.title,
+    description: req.body.description,
+    image: req.file.filename,
+  })
+  // console.log(post);
+  user.posts.push(post._id);
+  await user.save();
+  res.redirect('/profile');
 });
 
 //* Login Check Function 

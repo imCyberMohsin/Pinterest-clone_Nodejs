@@ -1,0 +1,19 @@
+<% include ./partials/Header.ejs %>
+<% include ./partials/LoggedinNav.ejs %>
+
+<div class="w-full h-min-screen">
+    <div class="cards flex justify-evenly flex-wrap gap-5 mt-8 p-5">
+            <% posts.forEach(post => { %>
+                <div class="card my-2">
+                    <div class="w-64 h-40 border-2 border-black rounded-xl overflow-hidden">
+                        <img src="/images/uploads/<%= post.image %>" alt="img" class="w-full h-full object-cover">
+                    </div>
+                    <a href="/show/posts" class="inline-block pl-1 text-xl font-medium pt-2"><%= post.title %></a>
+                    <p class="pt-2 pl-1 text-sm"><%= post.description %></p>
+                    <p class="pt-1 pl-1 text-xs text-zinc-600">@<%= post.user.username %></p>
+                </div>
+            <% }); %>
+    </div>
+</div>
+
+<% include ./partials/Footer.ejs %>
