@@ -21,9 +21,12 @@
     <form action="/createPost" method="post" enctype="multipart/form-data" class="py-5 flex justify-center gap-14">
         <!-- left -->
         <div>
-            <input type="file" name="postimage" class="">
-            <div class="h-96 w-72 bg-zinc-300 rounded-2xl overflow-hidden">
-                <img src="" alt="img" class="w-full h-full">
+            <!-- <input type="file" name="postimage"> -->
+            <input hidden type="file" name="postimage" id="uploadImage">
+            <div class="relative h-96 w-72 bg-zinc-300 rounded-2xl overflow-hidden">
+                <span id="uploadIcon" class="w-10 h-10 absolute right-1/2 bottom-1/2 rounded-full bg-white border-2 border-gray-900 flex justify-center items-center cursor-pointer">
+                    <i class="fa-solid fa-pencil"></i>
+                </span>
             </div>
         </div>
 
@@ -42,5 +45,13 @@
         </div>
     </form>
 </div>
+
+<!-- Script For Displaying Image Upload When Edit icon is clicked -->
+<script>
+    const uploadIcon = document.querySelector('#uploadIcon');
+    uploadIcon.addEventListener('click', (e)=>{
+        document.querySelector('#uploadImage').click();
+    })
+</script>
 
 <% include ./partials/Footer.ejs %>
